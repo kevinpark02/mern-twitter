@@ -16,8 +16,11 @@ const UserSchema = new Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+const User = mongoose.model("users", UserSchema);
+module.exports = User;
+// We are telling mongoose what it is to be user
+// You need a handle, email, password, and then it will stamp the date it was created
