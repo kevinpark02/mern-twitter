@@ -9,6 +9,8 @@ const tweets = require("./routes/api/tweets");
 const User = require("./models/User");
 // To set it up so that we can use POSTMan... tells our app what sorts of request it should respond to
 const bodyParser = require("body-parser");
+// Security
+const passport = require('passport');
 
 // We want mongoose to connect to the database created
 mongoose
@@ -24,8 +26,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-// We want to app to make a get request & send the response
-app.get("/", (req, res) => {
+// We want to app to make a get request & send the response (this also will be a test, that will get commented out)
+// app.get("/", (req, res) => {
     // Below is for testing to see if we can create a user, using the User model
     // const user = new User({
     //     handle: "jim",
@@ -33,8 +35,12 @@ app.get("/", (req, res) => {
     //     password: "jimisgreat123"
     // })
     // user.save()
-    res.send("Hello World!!");
-});
+//     res.send("Hello World!!");
+// });
+
+// Passport
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 // To see the json response returned, in the url type in localhost:5000/api/users/test
 // Why put test at the end? Because in users.js (routes), we made a get request with "/test"
