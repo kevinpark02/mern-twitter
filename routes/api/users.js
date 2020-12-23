@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
+// Security
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 
 router.get("/test", (req, res) => {
     res.json({ msg: "This is the user route" });
@@ -17,8 +20,38 @@ router.post('/register', (req, res) => {
                     email: req.body.email,
                     password: req.body.password
                 })
-                newUser.save().then(user => res.send(user)).catch(err => res.send(err));
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => { // you are taking the password string, and hashing it using salt... and then pass in the hashed password
+                        if(err) throw err; // If there is an error, throw it
+                        newUser.password = hash // If no error, then set the newUser's password to the hashed password
+                        newUser.save()
+                            .then(user => res.json(user))
+                            .catch(err => console.log(err));
+                    })
+                })
+                // newUser.save().then(user => res.send(user)).catch(err => res.send(err)); --> we need to take this out because we are saving the user before we are not yet saving the password to hash using bcrypt
             }
+        })
+})
+
+router.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne({ email: req.body.email })
+        .then(user => {
+            if(!user) {
+                return res.status(404).json({email: "This user does not exist"});
+            }
+
+            bcrypt.compare(password, user.password)
+                .then(isMatch => {
+                    if(isMatch) {
+                        res.json({msg: "Success"});
+                    } else {
+                        return res.status(400).json({password: "Incorrect password"});
+                    }
+                })
         })
 })
 
