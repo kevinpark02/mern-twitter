@@ -1,0 +1,62 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signout-links {
+    /* border: 1px black solid; */
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.session-links {
+    text-decoration: none;
+    color: black;
+    border: 1px black solid;
+    width: 80px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #1DA1F2;
+}
+
+.login-links {
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-right: 10px; */
+    border: 1px solid black;   
+    /* padding-left: 10px; */
+}
+
+.user-links {
+    text-decoration: none;
+    color: black;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-right: 1px solid black;
+    width: 100%;
+}
+
+.login-links button {
+    background: none;
+    border: none;
+    font-size: 16px;
+}
