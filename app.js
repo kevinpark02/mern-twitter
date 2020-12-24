@@ -27,7 +27,7 @@ mongoose
 app.use(bodyParser.json());
 
 // We want to app to make a get request & send the response (this also will be a test, that will get commented out)
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
   // Below is for testing to see if we can create a user, using the User model
   // const user = new User({
     //     handle: "jim",
@@ -35,8 +35,8 @@ app.get("/", (req, res) => {
     //     password: "jimisgreat123"
     // })
     // user.save()
-    res.send("Hello World!!");
-  });
+    // res.send("Hello World!!");
+  // });
   
   // Passport
   app.use(passport.initialize());
